@@ -1,0 +1,24 @@
+{
+  "name": "@deven-org/telemetry-vercel-functions",
+  "version": "1.0.0",
+  "description": "Telemetry Vercel serverless Functions",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/deven-org/telemetry-vercel-functions.git"
+  },
+  "keywords": [],
+  "author": "Deven Team",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/deven-org/telemetry-vercel-functions/issues"
+  },
+  "homepage": "https://github.com/deven-org/telemetry-vercel-functions#readme",
+  "dependencies": {
+    "js-base64": "^3.7.5",
+    "octonode": "^0.10.2"
+  }
+}
