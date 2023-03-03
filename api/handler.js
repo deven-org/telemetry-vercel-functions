@@ -1,6 +1,6 @@
 import { Base64 } from "js-base64";
 import * as github from "octonode";
-import { ERRORS, MANDATORY_ENV_VARS } from "../../config";
+import { ERRORS, MANDATORY_ENV_VARS } from "../config";
 
 const isValidEvent = (arg) => arg && arg.body && typeof arg.body === "string";
 const areMandatoryEnvVarsSet = () => {
