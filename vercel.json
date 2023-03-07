@@ -1,0 +1,13 @@
+{
+    "routes": [
+        {
+            "src": "/getandpush",
+            "dest": "/api/handler.js"
+        },
+        {
+            "src": "/",
+            "dest": "/api/hello.js"
+        }
+    ]
+  }
+  

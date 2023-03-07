@@ -20,5 +20,8 @@
   "dependencies": {
     "js-base64": "^3.7.5",
     "octonode": "^0.10.2"
+  },
+  "devDependencies": {
+    "@vercel/node": "^2.9.10"
   }
 }

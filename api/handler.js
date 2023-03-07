@@ -13,7 +13,8 @@ const areMandatoryEnvVarsSet = () => {
   return invalidVars.length === 0;
 };
 
-const handler = async (event) => {
+export async function handler (event){
+  console.log('Event Body', event);
   try {
     if (!isValidEvent(event)) {
       throw new Error(ERRORS.invalidEvent);
@@ -29,6 +30,8 @@ const handler = async (event) => {
       base64: Base64.encode(String(event.body)),
       json: JSON.parse(String(event.body)),
     };
+
+    
 
     const gh = github.client(process.env.GITHUB_ACCESS_TOKEN);
     const ghrepo = gh.repo(
@@ -63,4 +66,7 @@ const handler = async (event) => {
   };
 };
 
-export { handler };
+export default async (req,res) => {
+	const getandpush = await handler(req)
+	res.json(getandpush)
+};

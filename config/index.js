@@ -8,6 +8,7 @@ export const ERRORS = {
   export const MANDATORY_ENV_VARS = [
     "REPO_NAME",
     "REPO_OWNER",
+    "REPO_PATH",
     "TARGET_BRANCH",
     "GITHUB_ACCESS_TOKEN"
   ];
