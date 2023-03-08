@@ -1,12 +1,8 @@
 {
     "routes": [
         {
-            "src": "/getandpush",
-            "dest": "/api/handler.js"
-        },
-        {
             "src": "/",
-            "dest": "/api/hello.js"
+            "dest": "/api/handler.js"
         }
     ]
   }
