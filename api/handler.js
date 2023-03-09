@@ -14,8 +14,11 @@ const areMandatoryEnvVarsSet = () => {
   return invalidVars.length === 0;
 };
 
+//const handler = async (event) => {
 //export async function handler (event){
-const handler = async (event) => {
+
+export async function handler (event){
+  console.log('Req as event', event);
   try {
     console.log("Start...");
     if (!isValidEvent(event)) {
@@ -86,7 +89,12 @@ const handler = async (event) => {
   };
 };
 
-export {handler};
+export default async (req, res) => {
+	const getandpush = await handler(req)
+	res.json(getandpush)
+};
+
+//export {handler};
 
 // export default async (req) => {
 // 	//const getandpush = await handler(req)
