@@ -2,7 +2,7 @@ import { Base64 } from "js-base64";
 import * as github from "octonode";
 import { ERRORS, MANDATORY_ENV_VARS } from "../config";
 
-const isValidEvent = (arg) => arg && arg.body && typeof arg.body === "string";
+const isValidEvent = (arg) => arg && arg.body;
 
 const areMandatoryEnvVarsSet = () => {
   const invalidVars = [];
@@ -14,11 +14,7 @@ const areMandatoryEnvVarsSet = () => {
   return invalidVars.length === 0;
 };
 
-//const handler = async (event) => {
-//export async function handler (event){
-
-export async function handler (event){
-  console.log('Req as event', event);
+const handler = async (event) => {
   try {
     console.log("Start...");
     if (!isValidEvent(event)) {
@@ -33,9 +29,8 @@ export async function handler (event){
 
     const content = {
       base64: Base64.encode(String(event.body)),
-      json: JSON.parse(String(event.body)),
+      json: event.body
     };
-
     console.log("Content is ready..");
 
     const gh = github.client(process.env.GITHUB_ACCESS_TOKEN);
@@ -45,27 +40,14 @@ export async function handler (event){
     const path = `${process.env.REPO_PATH}/${
       content.json.repository.full_name
     }/${Date.now()}.json`;
-
     console.log("path", path);
 
     const action = content.json.action ? `- ${content.json.action}` : null;
-
     console.log("action", action);
-
     const message = `auto(data): ${content.json.repository.full_name} ${action}`;
-
     console.log("message", message);
 
-    console.log(
-      await ghrepo.createContentsAsync(
-        path,
-        message,
-        JSON.stringify(content.json),
-        process.env.TARGET_BRANCH
-      )
-    );
-
-    ghrepo.createContents(
+    await ghrepo.createContentsAsync(
       path,
       message,
       JSON.stringify(content.json),
@@ -89,14 +71,7 @@ export async function handler (event){
   };
 };
 
-export default async (req, res) => {
-	const getandpush = await handler(req)
-	res.json(getandpush)
-};
-
-//export {handler};
-
-// export default async (req) => {
-// 	//const getandpush = await handler(req)
-// 	//res.json(getandpush)
-// };
+module.exports = async (req, res) => {
+  const getandpush = await handler(req);
+  res.json(getandpush);
+}
