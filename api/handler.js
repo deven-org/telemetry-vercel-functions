@@ -3,6 +3,7 @@ import * as github from "octonode";
 import { ERRORS, MANDATORY_ENV_VARS } from "../config";
 
 const isValidEvent = (arg) => arg && arg.body && typeof arg.body === "string";
+
 const areMandatoryEnvVarsSet = () => {
   const invalidVars = [];
   MANDATORY_ENV_VARS.forEach((p) => {
@@ -13,8 +14,8 @@ const areMandatoryEnvVarsSet = () => {
   return invalidVars.length === 0;
 };
 
-export async function handler (event){
-  console.log('Event', event);
+//export async function handler (event){
+const handler = async (event) => {
   try {
     console.log("Start...");
     if (!isValidEvent(event)) {
@@ -85,7 +86,9 @@ export async function handler (event){
   };
 };
 
-export default async (req,res) => {
-	const getandpush = await handler(req)
-	res.json(getandpush)
-};
+export {handler};
+
+// export default async (req) => {
+// 	//const getandpush = await handler(req)
+// 	//res.json(getandpush)
+// };
